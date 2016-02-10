@@ -1,0 +1,20 @@
+{
+	"name": "one-track-koa",
+	"repository": "https://github.com/whtevn/one-track-koa.git",
+	"version": "0.0.1",
+	"description": "very simple router middleware",
+	"main": "build/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "babel -d build *.js"
+	},
+	"keywords": [],
+	"author": "Evan Short < evan.short@gmail.com >",
+	"license": "MIT",
+	"devDependencies": {
+		"babel-cli": "^6.4.5",
+		"babel-core": "^6.4.5",
+		"babel-preset-es2015": "^6.3.13",
+		"babel-plugin-transform-async-to-generator": "^6.5.0"
+	}
+}

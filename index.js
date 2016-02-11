@@ -1,6 +1,6 @@
 const middleware = (Router) => async (ctx, next) => {
   ctx.body = await Router
-                    .find(ctx.method, ctx.path, ctx.request.body, ctx.headers)
+                    .find(ctx.method, ctx.path, ctx.request.body, ctx.headers, ctx)
                     .catch((err) => {
                       console.log(err.stack);
                       ctx.status = err.code||ctx.status;

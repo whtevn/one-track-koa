@@ -1,7 +1,7 @@
 {
 	"name": "one-track-koa",
 	"repository": "https://github.com/whtevn/one-track-koa.git",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "very simple router middleware",
 	"main": "build/index.js",
 	"scripts": {

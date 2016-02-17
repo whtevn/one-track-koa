@@ -15,7 +15,7 @@ var middleware = function middleware(Router) {
             case 0:
               _context.next = 2;
               return Router.find(ctx.method, ctx.path, ctx.request.body, ctx.headers, ctx).catch(function (err) {
-                console.log(err.stack);
+                console.log(err.stack || err);
                 ctx.status = err.code || ctx.status;
                 return err;
               });

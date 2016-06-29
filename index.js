@@ -1,6 +1,10 @@
 require("babel-polyfill");
+
 const middleware = (Router) => async (ctx, next) => {
-  const query = ctx.query.map(q => JSON.parse(q));
+  let query = {};
+  for(var q in ctx.query){
+    query[q] = JSON.parse(ctx.query[q]);
+  }
   ctx.body = await Router
                     .find(ctx.method, ctx.path, ctx.headers, ctx.request.body, query, ctx)
                     .catch((err) => {

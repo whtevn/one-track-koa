@@ -7,28 +7,31 @@ Object.defineProperty(exports, "__esModule", {
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 require("babel-polyfill");
+
 var middleware = function middleware(Router) {
   return function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ctx, next) {
-      var query;
+      var query, q;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              query = ctx.query.map(function (q) {
-                return JSON.parse(q);
-              });
-              _context.next = 3;
+              query = {};
+
+              for (q in ctx.query) {
+                query[q] = JSON.parse(ctx.query[q]);
+              }
+              _context.next = 4;
               return Router.find(ctx.method, ctx.path, ctx.headers, ctx.request.body, query, ctx).catch(function (err) {
                 console.log(err.stack || err);
                 ctx.status = err.code || ctx.status;
                 return err;
               });
 
-            case 3:
+            case 4:
               ctx.body = _context.sent;
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }

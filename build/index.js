@@ -11,27 +11,37 @@ require("babel-polyfill");
 var middleware = function middleware(Router) {
   return function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(ctx, next) {
-      var query, q;
+      var query, parse_query_string;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              parse_query_string = function parse_query_string(query) {
+                for (var q in query) {
+                  try {
+                    query[q] = JSON.parse(decodeURIComponent(ctx.query[q]));
+                  } catch (e) {
+                    query[q] = ctx.query[q];
+                  }
+                }
+                return query;
+              };
+
               query = {};
 
-              for (q in ctx.query) {
-                query[q] = JSON.parse(ctx.query[q]);
-              }
-              _context.next = 4;
+
+              query = parse_query_string(ctx.query);
+              _context.next = 5;
               return Router.find(ctx.method, ctx.path, ctx.headers, ctx.request.body, query, ctx).catch(function (err) {
                 console.log(err.stack || err);
                 ctx.status = err.code || ctx.status;
                 return err;
               });
 
-            case 4:
+            case 5:
               ctx.body = _context.sent;
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }
